@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html dir="ltr" lang="en">
   <head>
@@ -70,7 +71,7 @@
         <div class="page-breadcrumb">
           <div class="row">
             <div class="col-12 d-flex no-block align-items-center">
-              <h4 class="page-title">Theaters</h4>
+              <h4 class="page-title">User Information</h4>
               <div class="ms-auto text-end">
                 <nav aria-label="breadcrumb">
                   <ol class="breadcrumb">
@@ -111,37 +112,36 @@
                           <th>First Nanme</th>
                           <th>Last Name</th>
                           <th>Email</th>
+                          <!--<th>Action</th>-->
                         </tr>
                       </thead>
                       <tbody>
-                        <?php
+                      <?php
                         require_once("connection.php");
-                        if(!$conn)
-                        {
+                        if(!$conn) {
                             echo "Connection not found";
-                        }
-                        else
-                        {
-                            $q="select * from userinfo";
-                            $res=mysqli_query($conn,$q);
-                            if($res->num_rows > 0)
-                            {
-                                while($row=$res->fetch_assoc())
-                                {
+                        } else {
+                            $q = "SELECT * FROM userinfo";
+                            $res = mysqli_query($conn, $q);
+                            if ($res->num_rows > 0) {
+                                while ($row = $res->fetch_assoc()) {
                                     ?>
-                                        <tr>
-                                            <td><?php echo $row['id']; ?></td>
-                                            <td><?php echo $row['firstName']; ?></td>
-                                            <td><?php echo $row['lastName']; ?></td>
-                                            <td><?php echo $row['email']; ?></td>
+                                    <tr>
+                                      <td><?php echo $row['id']; ?></td>
+                                      <td><?php echo $row['firstName']; ?></td>
+                                      <td><?php echo $row['lastName']; ?></td>
+                                      <td><?php echo $row['email']; ?></td>
+                                      <!--<td>
+                                         Delete Button with a confirmation popup
+                                        <button class="btn btn-danger delete-btn" data-id="<?php echo $row['id']; ?>">Delete</button>
+                                      </td>-->
+                                    </tr>
                                     <?php
                                 }
                             }
-
                         }
-
-                        ?>
-                      </tbody>
+                      ?>
+                    </tbody>
                       
                     </table>
                   </div>
@@ -200,10 +200,35 @@
     <script src="../assets/extra-libs/multicheck/jquery.multicheck.js"></script>
     <script src="../assets/extra-libs/DataTables/datatables.min.js"></script>
     <script>
-      /****************************************
-       *       Basic Table                   *
-       ****************************************/
-      $("#zero_config").DataTable();
+      $(document).ready(function() {
+        // Initialize the data table
+        $("#zero_config").DataTable();
+
+        // Handle Delete Button Click
+        $(".delete-btn").click(function() {
+          var userId = $(this).data("id");
+
+          // Confirm Deletion
+          if (confirm("Are you sure you want to delete this user?")) {
+            // Perform the delete action via AJAX
+            $.ajax({
+              url: "delete_user.php", // PHP script to handle deletion
+              method: "POST",
+              data: { id: userId },
+              success: function(response) {
+                // On successful deletion, remove the row from the table
+                if (response == "success") {
+                  alert("User deleted successfully!");
+                  // Remove the row from the table
+                  $("button[data-id='" + userId + "']").closest("tr").remove();
+                } else {
+                  alert("Error deleting user.");
+                }
+              }
+            });
+          }
+        });
+      });
     </script>
   </body>
 </html>

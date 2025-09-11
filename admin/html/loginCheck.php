@@ -4,7 +4,7 @@ session_start(); // Start the session
 $inputEmail = $_POST['email'];
 $inputPassword = $_POST['pwd'];
 
-include('connection.php');
+include('connection.php'); // Include your database connection
 
 // Query to fetch the user details
 $sql = "SELECT * FROM userinfo WHERE email = ?"; // Use prepared statements to avoid SQL injection
@@ -18,17 +18,17 @@ if ($result->num_rows > 0) {
     $user = $result->fetch_assoc(); // Get the user data
 
     // Check if the password matches
-    if ($inputPassword == $user['password']) { 
+    if ($inputPassword == $user['password']) {
         // Set session variables after successful login
         $_SESSION['user'] = $user['name']; // Store the user's name
-        $_SESSION['usertoken'] = $user['id']; // Store the user's ID as the session token
-        
-        // After user successfully logs in:
+        $_SESSION['user_id'] = $user['id']; // Store the user's ID
         $_SESSION['loggedIn'] = true; // Set logged in status to true
-        $_SESSION['user_id'] = $user['id']; // Store the user ID
 
         // Redirect to the homepage or another page after successful login
-        header('Location: index.php');
+        echo "<script type='text/javascript'>
+                    alert('Login successfully!');
+                    window.location.href = 'index.php'; // Redirect to login page after alert
+                  </script>";
         exit();
     } else {
         // Invalid password

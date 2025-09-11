@@ -1,3 +1,4 @@
+
 <?php
 require_once("connection.php");
 
@@ -12,9 +13,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['movie_id_update'])) {
         // Update the selected movie's active status
         $sql_update = "UPDATE movies SET is_active = '$active_status' WHERE id = '$movie_id'";
         if ($conn->query($sql_update) === TRUE) {
-            echo "Movie status updated successfully!";
-        } else {
-            echo "Error updating movie status: " . $conn->error;
+            echo "<script type='text/javascript'>alert('Movie status updated successfully!');</script>";
+    } else {
+        echo "<script type='text/javascript'>alert('Error updating status: " . $conn->error . "');</script>";
         }
     }
 }

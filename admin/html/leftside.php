@@ -1,3 +1,4 @@
+
 <!-- ============================================================== -->
 <!-- Left Sidebar - style you can find in sidebar.scss  -->
 <!-- ============================================================== -->
@@ -26,6 +27,10 @@
             <li class="sidebar-item">
               <a href="updatetheater.php" class="sidebar-link"><i class="mdi mdi-update"></i><span class="hide-menu">
                   Update Theaters </span></a>
+            </li>
+            <li class="sidebar-item">
+              <a href="ownerupdate.php" class="sidebar-link"><i class="mdi mdi-update"></i><span class="hide-menu">
+                  Update Owner Details </span></a>
             </li>
           </ul>
         </li>

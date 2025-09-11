@@ -1,0 +1,269 @@
+/* Theme CSS - Dark mode styles */
+
+:root {
+    --primary-color: #E50914;
+    --hover-color: #ff3333;
+    --card-bg: #1f2327;
+    --body-bg: #0a0e14;
+    --text-color: #ffffff;
+    --secondary-text: rgba(255, 255, 255, 0.85);
+    --muted-text: rgba(255, 255, 255, 0.7);
+    --heading-color: #ffffff;
+    --highlight-color: #ff6b6b;
+    --icon-color: #ffffff;
+    --card-border: rgba(255, 255, 255, 0.05);
+    --shadow-color: rgba(0, 0, 0, 0.15);
+    --input-bg: #2a2c3d;
+    --input-border: rgba(255, 255, 255, 0.1);
+    --input-text: #ffffff;
+    --input-placeholder: rgba(255, 255, 255, 0.5);
+    --button-text: #ffffff;
+    --link-color: #3498db;
+    --link-hover: #2980b9;
+    --table-border: rgba(255, 255, 255, 0.1);
+    --table-row-hover: rgba(255, 255, 255, 0.05);
+    --outline-button-text: #ffffff;
+    --navbar-text: #ffffff;
+    --btn-text: #ffffff;
+    --secondary-color: #14181c;
+    --dropdown-bg: #1f2327;
+    --dropdown-text: #ffffff;
+    --dropdown-hover: #2a2e36;
+    --border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Common Elements */
+body {
+    background-color: var(--body-bg);
+    color: var(--text-color);
+}
+
+/* Text elements */
+p, span, div, li, td, th, label, small {
+    color: var(--text-color) !important;
+}
+
+/* Specific text elements */
+.meta-value, .movie-title, .screen-time, .empty-text, 
+.section-title, .page-title, .card-title, .card-text,
+.movie-name, .movie-info-item span, .summary-label, .summary-value,
+.booking-title, .movie-meta-item span, .form-label {
+    color: var(--text-color) !important;
+}
+
+.meta-label, .screen-info, .card-subtitle, .text-muted,
+.movie-description, .movie-info-item i, .summary-item {
+    color: var(--secondary-text) !important;
+}
+
+/* Navbar elements */
+.navbar-nav .nav-link {
+    color: var(--navbar-text) !important;
+}
+
+.navbar-nav .nav-link:hover, .navbar-nav .nav-link.active {
+    color: var(--primary-color) !important;
+}
+
+/* Buttons */
+.btn-primary, .btn-book, .btn-confirm, .btn-pay {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    color: var(--btn-text) !important;
+}
+
+.btn-primary:hover, .btn-book:hover, .btn-confirm:hover, .btn-pay:hover {
+    background-color: var(--hover-color);
+    border-color: var(--hover-color);
+    color: var(--btn-text) !important;
+}
+
+.btn-secondary {
+    color: var(--btn-text) !important;
+}
+
+.btn-outline-primary {
+    color: var(--primary-color) !important;
+    border-color: var(--primary-color);
+}
+
+.btn-outline-primary:hover {
+    background-color: var(--primary-color);
+    color: var(--btn-text) !important;
+}
+
+.btn-outline-light {
+    color: var(--text-color) !important;
+    border-color: var(--text-color);
+}
+
+/* Cards */
+.card {
+    background-color: var(--card-bg);
+    border-color: var(--card-border);
+    box-shadow: 0 4px 12px var(--shadow-color);
+}
+
+/* Card elements */
+.card-header, .card-footer {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+/* Forms */
+.form-control {
+    background-color: var(--input-bg);
+    color: var(--input-text);
+    border-color: var(--input-border);
+}
+
+.form-control:focus {
+    background-color: var(--input-bg);
+    color: var(--input-text);
+    border-color: var(--primary-color);
+}
+
+.form-control::placeholder {
+    color: var(--input-placeholder);
+}
+
+/* Form labels and legends */
+label, legend, .form-label, .form-text {
+    color: var(--text-color) !important;
+}
+
+/* Links */
+a {
+    color: var(--link-color);
+}
+
+a:hover {
+    color: var(--link-hover);
+}
+
+/* Tables */
+.table {
+    color: var(--text-color) !important;
+}
+
+.table th, .table td {
+    border-color: var(--table-border);
+    color: var(--text-color) !important;
+}
+
+.table-hover tbody tr:hover {
+    background-color: var(--table-row-hover);
+}
+
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+    color: var(--heading-color) !important;
+}
+
+/* Bootstrap components */
+.alert {
+    background-color: var(--card-bg);
+    color: var(--text-color);
+}
+
+.badge {
+    background-color: var(--primary-color);
+}
+
+.dropdown-menu {
+    background-color: var(--dropdown-bg);
+    border-color: var(--border-color);
+}
+
+.dropdown-item {
+    color: var(--dropdown-text);
+}
+
+.dropdown-item:hover {
+    background-color: var(--dropdown-hover);
+}
+
+/* Screen header text */
+.screen-header {
+    color: white !important;
+}
+
+/* Movie cards specific */
+.movie-card {
+    background-color: var(--card-bg);
+    color: var(--text-color) !important;
+}
+
+.movie-details {
+    color: var(--text-color) !important;
+}
+
+.movie-description {
+    color: var(--secondary-text) !important;
+}
+
+/* Screen cards specific */
+.screen-card {
+    background-color: var(--card-bg);
+    color: var(--text-color) !important;
+}
+
+.screen-body {
+    color: var(--text-color) !important;
+}
+
+/* Payment page specific */
+.payment-container {
+    background-color: var(--card-bg);
+    color: var(--text-color) !important;
+}
+
+.booking-summary {
+    background-color: var(--card-bg);
+    color: var(--text-color) !important;
+}
+
+/* Seat selection specific */
+.seat-selection-container {
+    color: var(--text-color) !important;
+}
+
+.seat-selection-header {
+    color: var(--text-color) !important;
+}
+
+.movie-info-card {
+    background-color: var(--card-bg);
+    color: var(--text-color) !important;
+}
+
+/* Receipt specific */
+.receipt-container {
+    background-color: var(--card-bg);
+    color: var(--text-color) !important;
+}
+
+.receipt-details {
+    color: var(--text-color) !important;
+}
+
+/* Index page specific */
+.movie-grid {
+    color: var(--text-color) !important;
+}
+
+.movie-card {
+    background-color: var(--card-bg);
+    color: var(--text-color) !important;
+}
+
+.movie-info {
+    color: var(--text-color) !important;
+}
+
+.movie-title {
+    color: var(--heading-color) !important;
+}
+
+.movie-meta {
+    color: var(--secondary-text) !important;
+} 

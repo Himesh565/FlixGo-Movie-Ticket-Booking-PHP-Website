@@ -1,3 +1,4 @@
+
 <!-- ============================================================== -->
     <!-- Preloader - style you can find in spinners.css -->
     <!-- ============================================================== -->
@@ -28,7 +29,7 @@
             <!-- ============================================================== -->
             <!-- Logo -->
             <!-- ============================================================== -->
-            <a class="navbar-brand" href="index.php">
+            <a class="navbar-brand" href="adminindex.php">
               <!-- Logo icon -->
               <b class="logo-icon ps-2">
                 <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
@@ -44,7 +45,7 @@
               <!-- Logo text -->
               <span class="logo-text ms-2">
                 <img
-                  src="../assets/images/logo-text.png"
+                  src="../assets/images/logo.png"
                   alt="homepage"
                   class="light-logo"
                 />

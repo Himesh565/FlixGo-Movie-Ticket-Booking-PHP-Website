@@ -55,33 +55,23 @@
         <div class="page-breadcrumb">
             <div class="row">
                 <div class="col-12 d-flex no-block align-items-center">
-                    <h4 class="page-title">Theaters</h4>
+                    <h4 class="page-title">Screen</h4>
                     <div class="ms-auto text-end">
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">
-                                    Library
-                                </li>
+                                <li class="breadcrumb-item active" aria-current="page">Library</li>
                             </ol>
                         </nav>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- ============================================================== -->
-        <!-- End Bread crumb and right sidebar toggle -->
-        <!-- ============================================================== -->
-        <!-- ============================================================== -->
-        <!-- Container fluid  -->
-        <!-- ============================================================== -->
+
         <div class="container-fluid">
-            <!-- ============================================================== -->
             <!-- Start Page Content -->
-            <!-- ============================================================== -->
             <div class="row">
                 <div class="col-12">
-
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title">Movies</h5>
@@ -90,35 +80,56 @@
                                     <thead>
                                         <tr>
                                             <th>Screen Id</th>
-                                            <th>Movie Id</th>
+                                            <th>Movie Name</th>
+                                            <th>Theater Name</th>
                                             <th>Screen No</th>
                                             <th>Show Time</th>
                                             <th>Price</th>
-                                            <th>Action</th> <!-- New Action Column -->
+                                            <th>Is Active</th>
+                                            <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php
                                         require_once("connection.php");
+
                                         if (!$conn) {
                                             echo "Connection not found";
                                         } else {
-                                            $q = "SELECT * FROM screens";
+                                            // SQL query to join movies and theater tables using theater_id
+                                            $q = "SELECT screens.*, 
+                                                     movies.name AS movie_name, 
+                                                     theater.name AS theater_name
+                                              FROM screens
+                                              JOIN movies ON screens.movie_id = movies.id
+                                              JOIN theater ON movies.theater_id = theater.id"; // Corrected join using `movies.theater_id`
                                             $res = mysqli_query($conn, $q);
+
                                             if ($res->num_rows > 0) {
                                                 while ($row = $res->fetch_assoc()) {
                                                     ?>
                                                     <tr>
                                                         <td><?php echo $row['id']; ?></td>
-                                                        <td><?php echo $row['movie_id']; ?></td>
+                                                        <td><?php echo $row['movie_name']; ?></td> <!-- Movie Name -->
+                                                        <td><?php echo $row['theater_name']; ?></td>
+                                                        <!-- Theater Name from theater table -->
                                                         <td><?php echo $row['screen_number']; ?></td>
                                                         <td><?php echo $row['show_time']; ?></td>
                                                         <td><?php echo $row['price']; ?></td>
                                                         <td>
-                                                            <form action="delete_screen.php" method="POST" style="display:inline;">
+                                                            <?php if ($row['is_active'] == 1) { ?>
+                                                                <i class="fas fa-thumbs-up" style="font-size:24px;color:green"></i>
+                                                            <?php } else { ?>
+                                                                <i class="fas fa-thumbs-down" style="font-size:24px;color:red"></i>
+                                                            <?php } ?>
+                                                        </td>
+                                                        <td>
+                                                            <form action="update_screen.php" method="POST" style="display:inline;">
                                                                 <input type="hidden" name="screen_id"
                                                                     value="<?php echo $row['id']; ?>">
-                                                                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                                                <button type="submit" class="btn btn-warning btn-sm">
+                                                                    <?php echo ($row['is_active'] == 1) ? 'Deactivate' : 'Activate'; ?>
+                                                                </button>
                                                             </form>
                                                         </td>
                                                     </tr>
@@ -127,42 +138,21 @@
                                             }
                                         }
                                         ?>
-
                                     </tbody>
-
                                 </table>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <!-- ============================================================== -->
-            <!-- End PAge Content -->
-            <!-- ============================================================== -->
-            <!-- ============================================================== -->
-            <!-- Right sidebar -->
-            <!-- ============================================================== -->
-            <!-- .right-sidebar -->
-            <!-- ============================================================== -->
-            <!-- End Right sidebar -->
-            <!-- ============================================================== -->
+            </div> <!-- End of content -->
         </div>
-        <!-- ============================================================== -->
-        <!-- End Container fluid  -->
-        <!-- ============================================================== -->
-        <!-- ============================================================== -->
-        <!-- footer -->
-        <!-- ============================================================== -->
-        <?php
-        require_once("foot.php")
-            ?>
-        <!-- ============================================================== -->
-        <!-- End footer -->
-        <!-- ============================================================== -->
     </div>
-    <!-- ============================================================== -->
-    <!-- End Page wrapper  -->
-    <!-- ============================================================== -->
+ 
+    <!-- End Page Content -->
+    <?php
+    require_once("foot.php")
+        ?>
+    </div>============================================================== -->
     </div>
     <!-- ============================================================== -->
     <!-- End Wrapper -->

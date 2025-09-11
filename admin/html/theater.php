@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html dir="ltr" lang="en">
   <head>
@@ -137,7 +138,16 @@
                                         <tr>
                                             <td><?php echo $row['id']; ?></td>
                                             <td><?php echo $row['name']; ?></td>
-                                            <td><?php echo $row['poster']; ?></td>
+                                            <td>
+                                              <?php
+                                                if (!empty($row['poster'])) {
+                                                    // Assuming posters are stored in a directory like 'uploads/posters/'
+                                                    echo '<img src="' . $row['poster'] . '" alt="Movie Poster" width="100" height="150">';
+                                                } else {
+                                                    echo "No poster available";
+                                                }
+                                              ?>
+                                            </td>
                                             <td><?php echo $row['owner']; ?></td>
                                             <td><?php echo $row['mobileno']; ?></td>
                                             <td><?php echo $row['address']; ?></td>

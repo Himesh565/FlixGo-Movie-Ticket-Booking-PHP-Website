@@ -1,25 +1,28 @@
-
 <?php
 require_once("connection.php");
 
-// Update `is_active` if form is submitted
+// Update theater owner's details if the form is submitted
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['theater_id'])) {
     $theater_id = $_POST['theater_id'];
-    $is_active = $_POST['is_active'];
+    $owner_name = $_POST['owner_name'];
+    $owner_mobile_no = $_POST['owner_mobile_no'];
+    $owner_email = $_POST['owner_email'];
 
-    // Update the theater's is_active status
-    $sql_update = "UPDATE theater SET is_active = '$is_active' WHERE id = '$theater_id'";
+    // Update theater owner's details
+    $sql_update = "UPDATE theater SET mobileno = '$owner_mobile_no', email = '$owner_email' WHERE id = '$theater_id'";
+
     if ($conn->query($sql_update) === TRUE) {
-        echo "<script type='text/javascript'>alert('Theater status updated successfully!');</script>";
+        echo "<script type='text/javascript'>alert('Owner status updated successfully!');</script>";
     } else {
         echo "<script type='text/javascript'>alert('Error updating status: " . $conn->error . "');</script>";
     }
 }
 
 // Fetch theaters from the database
-$sql = "SELECT id, name, is_active FROM theater";
+$sql = "SELECT id, name, mobileno, email FROM theater";
 $result = $conn->query($sql);
 ?>
+
 <?php
 require_once("topbar.php");
 ?>
@@ -107,78 +110,69 @@ require_once("topbar.php");
         <!-- Container fluid  -->
         <!-- ============================================================== -->
         <div class="container-fluid">
-            <!-- ============================================================== -->
             <!-- Start Page Content -->
-            <!-- ============================================================== -->
-            <div class="container-fluid">
-                <!-- Start Page Content -->
-                <div class="row justify-content-center mt-5">
-                    <div class="col-md-6">
-                        <div class="card">
-                            <form class="form-horizontal" name="updateStatusForm" action="" method="post">
-                                <div class="card-body">
-                                    <h4 class="card-title">Update Theater Status</h4>
+            <div class="row justify-content-center mt-5">
+                <div class="col-md-6">
+                    <div class="card">
+                        <form class="form-horizontal" name="updateOwnerForm" action="" method="post">
+                            <div class="card-body">
+                                <h4 class="card-title">Update Owner's Details</h4>
 
-                                    <!-- Theater Select -->
-                                    <div class="form-group row">
-                                        <label for="theater_id"
-                                            class="col-sm-3 text-end control-label col-form-label">Select
-                                            Theater</label>
-                                        <div class="col-sm-9">
-                                            <select class="form-select" id="theater_id" name="theater_id" required>
-                                                <option value="">Choose a theater</option>
-                                                <?php
-                                                // Populate the select options with theaters from the database
-                                                if ($result->num_rows > 0) {
-                                                    while ($row = $result->fetch_assoc()) {
-                                                        echo "<option value='" . $row['id'] . "'>" . $row['name'] . "</option>";
-                                                    }
-                                                } else {
-                                                    echo "<option value=''>No theaters available</option>";
+                                <!-- Theater Select -->
+                                <div class="form-group row">
+                                    <label for="theater_id" class="col-sm-3 text-end control-label col-form-label">Select Theater</label>
+                                    <div class="col-sm-9">
+                                        <select class="form-select" id="theater_id" name="theater_id" required>
+                                            <option value="">Choose a theater</option>
+                                            <?php
+                                            // Populate the select options with theaters from the database
+                                            if ($result->num_rows > 0) {
+                                                while ($row = $result->fetch_assoc()) {
+                                                    echo "<option value='" . $row['id'] . "'>" . $row['name'] . "</option>";
                                                 }
-                                                ?>
-                                            </select>
-                                        </div>
-                                    </div>
-
-                                    <!-- Is Active Select -->
-                                    <div class="form-group row mt-3">
-                                        <label for="is_active" class="col-sm-3 text-end control-label col-form-label">Is
-                                            Active</label>
-                                        <div class="col-sm-9">
-                                            <select class="form-select" id="is_active" name="is_active" required>
-                                                <option value="1">Active</option>
-                                                <option value="0">Inactive</option>
-                                            </select>
-                                        </div>
+                                            } else {
+                                                echo "<option value=''>No theaters available</option>";
+                                            }
+                                            ?>
+                                        </select>
                                     </div>
                                 </div>
 
-                                <!-- Submit Button -->
-                                <div class="border-top">
-                                    <div class="card-body">
-                                        <button type="submit" class="btn btn-primary">Update Status</button>
+                                <!-- Owner Name -->
+                                <div class="form-group row mt-3">
+                                    <label for="owner_name" class="col-sm-3 text-end control-label col-form-label">Owner Name</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" id="owner_name" name="owner_name" required>
                                     </div>
                                 </div>
-                            </form>
-                        </div>
+
+                                <!-- Owner Mobile No -->
+                                <div class="form-group row mt-3">
+                                    <label for="owner_mobile_no" class="col-sm-3 text-end control-label col-form-label">Owner Mobile No</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" id="owner_mobile_no" name="owner_mobile_no" required>
+                                    </div>
+                                </div>
+
+                                <!-- Owner Email -->
+                                <div class="form-group row mt-3">
+                                    <label for="owner_email" class="col-sm-3 text-end control-label col-form-label">Owner Email</label>
+                                    <div class="col-sm-9">
+                                        <input type="email" class="form-control" id="owner_email" name="owner_email" required>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Submit Button -->
+                            <div class="border-top">
+                                <div class="card-body">
+                                    <button type="submit" class="btn btn-primary">Update Owner's Details</button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
-
-
-            <!-- editor -->
-
-            <!-- ============================================================== -->
-            <!-- End PAge Content -->
-            <!-- ============================================================== -->
-            <!-- ============================================================== -->
-            <!-- Right sidebar -->
-            <!-- ============================================================== -->
-            <!-- .right-sidebar -->
-            <!-- ============================================================== -->
-            <!-- End Right sidebar -->
-            <!-- ============================================================== -->
         </div>
         <!-- ============================================================== -->
         <!-- End Container fluid  -->
